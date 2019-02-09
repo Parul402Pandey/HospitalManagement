@@ -1,0 +1,45 @@
+1.// doctor table creation
+create table Doctor(doctor_id int not null primary  key,name varchar(30),phone_no varchar(12),salary decimal(20,2));
+
+2.//patient table creation
+create table Patient(patient_id int not null primary key,name varchar(40),phone_no varchar(20));
+
+3.//specialist atble creation
+create table Specialist(doctor_id int,field_area varchar(30));
+//
+alter table Specialist
+add foreign key(doctor_id) references Doctor(doctor_id);
+
+4.//appointment table creation
+create table Appointment(appointment_no int not null primary key,doctor_id int,patient_id int,date Date,start_time Time,end_time Time,day enum('sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') );rr
+
+//
+alter table Appointent
+add foreign key(doctor_id) references Doctor(doctor_id);
+//
+alter table Appointent
+add foreign key(patient_id) references Patient(patient_id);
+//
+5.//schedule table creation
+create table Schedule(schedule_id int not null,doctor_id int,patient_id int,start_time Time,end_time Time,primary key(schedule_id));
+//
+alter table Schedule
+    -> add foreign key(doctor_id) references Doctor(doctor_id);
+Query OK, 0 rows affected (0.23 sec)
+//
+ alter table Schedule add foreign key(patient_id) references Patient(patient_id);
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+6.//availability table creation
+create table Availability(appointment_no int,status varchar(20));
+Query OK, 0 rows affected (0.10 sec)
+//
+alter table Availability
+    -> add foreign key(appointment_no) references Appointment(appointment_no);
+Query OK, 0 rows affected (0.32 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+
